@@ -298,11 +298,11 @@ cp -f ./config/ip6tables /etc/sysconfig/ip6tables
 
 #### PAM CONFIGURATIONS
 cp -f ./config/system-auth-local /etc/pam.d/system-auth-local
-cp -f ./config/system-auth-local /etc/pam.d/system-auth-ac
-ln -sf /etc/pam.d/system-auth-local /etc/pam.d/system-auth 
+cp -f ./config/system-auth-ac /etc/pam.d/system-auth-ac
+ln -sf /etc/pam.d/system-auth-ac /etc/pam.d/system-auth 
 cp -f ./config/password-auth-local /etc/pam.d/password-auth-local
-cp -f ./config/password-auth-local /etc/pam.d/password-auth-ac
-ln -sf /etc/pam.d/password-auth-local /etc/pam.d/password-auth
+cp -f ./config/password-auth-ac /etc/pam.d/password-auth-ac
+ln -sf /etc/pam.d/password-auth-ac /etc/pam.d/password-auth
 cp -f ./config/gnome-screensaver /etc/pam.d/gnome-screensaver
 
 ##### SUDO CONFIGURATION (isso role, sudo access for wheel)
