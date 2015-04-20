@@ -1,8 +1,7 @@
 #!/bin/sh
 
 ## (GEN000580: CAT II) (Previously – G019) The IAO will ensure all passwords contain 14
-## characters (set in config/login.defs) - Ensuring 12 characters minimum due to fact
-## that some organizations/agencies have shorter passwords with higher complexity.
+## characters (set in config/login.defs)
 ## SRG RHEL-06-000050
 echo '==================================================='
 echo ' Patching GEN000580: Set minimum Password length.'
