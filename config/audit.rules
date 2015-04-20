@@ -90,11 +90,9 @@
 
 # Audit system events
 -a always,exit -F arch=b32 -S acct -S reboot -S sched_setparam -S sched_setscheduler -S setrlimit -S swapon 
--a always,exit -F arch=b64 -S acct -S reboot -S sched_setparam -S sched_setscheduler -S setrlimit -S swapon 
 
 # Audit any link creation
 -a always,exit -F arch=b32 -S link -S symlink
--a always,exit -F arch=b64 -S link -S symlink
 
 ##############################
 ## NIST 800-53 Requirements ##
@@ -103,8 +101,6 @@
 #2.6.2.4.1 Records Events that Modify Date and Time Information
 -a always,exit -F arch=b32 -S adjtimex -S stime -S settimeofday -k time-change
 -a always,exit -F arch=b32 -S clock_settime -k time-change
--a always,exit -F arch=b64 -S adjtimex -S settimeofday -k time-change
--a always,exit -F arch=b64 -S clock_settime -k time-change
 -w /etc/localtime -p wa -k time-change
 
 #2.6.2.4.2 Record Events that Modify User/Group Information
@@ -117,7 +113,6 @@
 
 #2.6.2.4.3 Record Events that Modify the Systems Network Environment
 -a always,exit -F arch=b32 -S sethostname -S setdomainname -k audit_network_modifications
--a always,exit -F arch=b64 -S sethostname -S setdomainname -k audit_network_modifications
 -w /etc/issue -p wa -k audit_network_modifications
 -w /etc/issue.net -p wa -k audit_network_modifications
 -w /etc/hosts -p wa -k audit_network_modifications
@@ -139,15 +134,10 @@
 -a always,exit -F arch=b32 -S chmod -S fchmod -S fchmodat -F auid>=500 -F auid!=4294967295 -k perm_mod
 -a always,exit -F arch=b32 -S chown -S fchown -S fchownat -S lchown -F auid>=500 -F auid!=4294967295 -k perm_mod
 -a always,exit -F arch=b32 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=500 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b64 -S chmod -S fchmod -S fchmodat -F auid>=500 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b64 -S chown -S fchown -S fchownat -S lchown -F auid>=500 -F auid!=4294967295 -k perm_mod
--a always,exit -F arch=b64 -S setxattr -S lsetxattr -S fsetxattr -S removexattr -S lremovexattr -S fremovexattr -F auid>=500 -F auid!=4294967295 -k perm_mod
 
 #2.6.2.4.8 Ensure auditd Collects Unauthorized Access Attempts to Files (unsuccessful)
 -a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=500 -F auid!=4294967295 -k access
 -a always,exit -F arch=b32 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=500 -F auid!=4294967295 -k access
--a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EACCES -F auid>=500 -F auid!=4294967295 -k access
--a always,exit -F arch=b64 -S creat -S open -S openat -S truncate -S ftruncate -F exit=-EPERM -F auid>=500 -F auid!=4294967295 -k access
 
 #2.6.2.4.9 Ensure auditd Collects Information on the Use of Privileged Commands
 -a always,exit -F path=/bin/ping -F perm=x -F auid>=500 -F auid!=4294967295 -k privileged
@@ -196,11 +186,9 @@
 
 #2.6.2.4.10 Ensure auditd Collects Information on Exporting to Media (successful)
 -a always,exit -F arch=b32 -S mount -F auid>=500 -F auid!=4294967295 -k export
--a always,exit -F arch=b64 -S mount -F auid>=500 -F auid!=4294967295 -k export
 
 #2.6.2.4.11 Ensure auditd Collects Files Deletion Events by User (successful and unsuccessful)
 -a always,exit -F arch=b32 -S unlink -S rmdir -S unlinkat -S rename -S renameat -F auid>=500 -F auid!=4294967295 -k delete
--a always,exit -F arch=b64 -S unlink -S rmdir -S unlinkat -S rename -S renameat -F auid>=500 -F auid!=4294967295 -k delete
 
 #2.6.2.4.12 Ensure auditd Collects System Administrator Actions
 -w /etc/sudoers -p wa -k actions
@@ -210,7 +198,10 @@
 -w /sbin/rmmod -p x -k modules
 -w /sbin/modprobe -p x -k modules
 -a always,exit -F arch=b32 -S init_module -S delete_module -k modules
--a always,exit -F arch=b64 -S init_module -S delete_module -k modules
 
 #2.6.2.4.14 Make the auditd Configuration Immutable
 -e 2
+
+#audit deleted files
+-a always,exit -F arch=ARCH -S unlink -S unlinkat -S rename -S renameat -F auid>=500 -F auid!=4294967295 -k delete
+-a always,exit -F arch=ARCH -S rmdir -S unlink -S unlinkat -S rename -S renameat -F auid=0 -k delete
