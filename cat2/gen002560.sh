@@ -20,7 +20,7 @@ if [ $? -gt 0 ]; then
 	sed -i "/umask/ c\umask 077" /etc/profile
 fi
 
-`grep umask /etc/init.d/functions | grep -q 027`
+`grep umask /etc/init.d/functions | grep -q 022`
 if [ $? -gt 0 ]; then
-	sed -i "/umask/ c\umask 027" /etc/init.d/functions
+	sed -i "/umask/ c\umask 022" /etc/init.d/functions
 fi
