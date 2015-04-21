@@ -15,8 +15,8 @@ These scripts will harden a system to specifications that
 are based upon the the following hardening and specifications
 provided by the following projects:
 
-     DISA RHEL 6 STIG V1 R2
-     http://iase.disa.mil/stigs/os/unix/red_hat.html
+     DISA RHEL 6 STIG V1 R6
+     http://iase.disa.mil/stigs/os/unix-linux/Pages/red-hat.aspx
 
      NIST 800-53 (USGCB) Content for RHEL 5
      http://usgcb.nist.gov/usgcb/rhel_content.html
