@@ -26,6 +26,9 @@ for SRV in $ONSRV; do
 	fi
 done
 
+chkconfig rsyslog on
+service rsyslog start
+
 ### IPv6 - Requires ip6tables
 `grep NETWORKING_IPV6 /etc/sysconfig/network | grep -q yes`
 if [ $? -eq 0 ]; then
