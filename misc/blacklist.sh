@@ -17,7 +17,7 @@ echo -e "install bluetooth /bin/false" >> /etc/modprobe.d/usgcb-blacklist.conf
 # DISA GEN007260 - Disable AppleTalk
 echo -e "install appletalk /bin/false" >> /etc/modprobe.d/usgcb-blacklist.conf 
 # NSA Recommendation: Disable mounting USB Mass Storage
-echo -e "install usb-storage /bin/false" >> /etc/modprobe.d/usgcb-blacklist.conf
+echo -e "install usb-storage /bin/true" >> /etc/modprobe.d/usgcb-blacklist.conf
 # Disable mounting of cramfs CCE-14089-7 (row 26)
 echo -e "install cramfs /bin/false" >> /etc/modprobe.d/usgcb-blacklist.conf
 # Disable mounting of freevxfs CCE-14457-6 (row 27)
